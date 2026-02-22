@@ -1,0 +1,61 @@
+
+
+
+
+!! ATTENTION !! le programme nécessite la librairie pynput (https://pypi.org/project/pynput/) et doit être executé dans le shell de IDLE
+
+Composition du dossier.zip : 
+
+- un fichier avec les classes (une classe Empty, une classe Tas qui possède des méthodes pciales pour gérer la file d'Avions, une classe Avion qui permet de gérer un avion)
+- un fichier fonctions, avec les fonctions principales du programme
+- un fichier Main qui permet de démarrer la simulation
+
+
+
+
+
+##Implémentation de la simulation de file d'attente d'avions :##
+
+- nous avons décidé de faire une distinction entre la file d'attente des avions qui souhaitent atterrir dans l'aéroport, et la file d'attente les avions qui ont déjà atterri et qui attendent de libérer la piste. Nous avons donc deux tas.
+
+Notre piste d'atterrissage contient 3 voies. Ainsi, cela signifie qu'un avion ne peut pas atterrir si il y a déjà trois avions sur la piste. Il faut attendre pour qu'un avion libère une des voies de la piste ! 
+
+Une tentative d'atterrissage (parce que la piste n'est donc pas forcément libérée) se fait automatiquement, sans interaction avec l'utilisateur, environ toutes les trois secondes. Un avion libère la piste en 10 secondes. 
+
+
+
+- Interactions avec l'utilisateur : Pour prendre controle avec la simulation, l'utilisateur doit presser la touche ctrl pendant environ une seconde. Une texte s'affiche ensuite, qui invite l'utilisateur à indiquer quelle action il veut effectuer. 
+Les actions sont : 
+- Afficher la file d'attente des avions (l)
+- générer aléatoirement une file de n avions (g)
+- ajouter un avion manuellement à la file (a)
+- afficher la taille de la file d'attente et de de la piste (= au nombre d'avions sur la piste) (t)
+- afficher les règles du jeu (info)
+- afficher la piste (p)
+
+Si l'utilisateur ne fait rien, la simulation continue : les avions atterrissent, peuvent être détournés, libèrent la piste, etc, jusqu'à ce qu'il n'y ait plus d'avions ni sur la piste ni dans la file d'attente. 
+Note : pour interagir de nouveau avec la simulation, il faut appuyer de nouveau sur "contrôle".
+
+
+
+
+Les avions : 
+- chaque avion est un objet avion de la classe Avion, dont un des attributs est la priorité. Un avion enflammé est plus prioritaire qu'un avion piraté (car le criminel ne passe pas forcément à l'action !) qui est lui même plus prioritaire qu'un avion qui n'a plus de carburant (car il peut planer !). Un avion peut cumuler plusieurs problèmes. 
+
+En fonction des problèmes caractérisant les avions, un poids est attribué à chacun. Chaque problème a un certain poids qui est soustrait au poids par défaut de l'avion (100). Cela permet à l'avion le plus prioritaire d'avoir un poids minimal et de se retrouver à la tête du tas bgérant les priorités. 
+
+- Un problème (feu, pirate, carburant) ne peut pas changer une fois que l'avion entre dans la file d'attente
+
+- Chaque avion piraté à un risque sur 25 d'être détourné chaque seconde. 
+
+
+
+
+
+
+
+
+
+
+
+
